@@ -1,0 +1,13 @@
+<h2>Mi Galería Personal</h2>
+<p>Hola, {{ user.username }}! <a href="{% url 'logout' %}">Cerrar sesión</a></p>
+
+<div style="display: flex; gap: 10px;">
+    {% for foto in fotos %}
+        <div>
+            <img src="{{ foto.imagen.url }}" width="200">
+            <p>{{ foto.titulo }}</p>
+        </div>
+    {% empty %}
+        <p>No tienes fotos aún.</p>
+    {% endfor %}
+</div>

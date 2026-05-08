@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'galeria'
+    'galeria',
+    'storages'
 ]
 
 MIDDLEWARE = [
@@ -78,9 +79,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'db_galeria',
-        'USER': 'root',
-        'PASSWORD': '',
-        'HOST': 'localhost',
+        'USER': 'admin',
+        'PASSWORD': 'Javier#123',
+        'HOST': 'bd-eva3.ckzjrfhbvkr5.us-east-1.rds.amazonaws.com',
         'PORT': '3306',
     }
 }
@@ -130,3 +131,24 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 LOGIN_REDIRECT_URL = '/'  # Te manda a la galería al entrar
 LOGOUT_REDIRECT_URL = 'login' # Te manda al login al salir
 
+# ==========================================
+# CONFIGURACIÓN S3 (LIMPIA PARA GITHUB)
+# ==========================================
+
+# AWS_ACCESS_KEY_ID = '...'      <-- COMENTA ESTO
+# AWS_SECRET_ACCESS_KEY = '...'  <-- COMENTA ESTO
+# AWS_SESSION_TOKEN = '...'      <-- COMENTA ESTO
+
+AWS_STORAGE_BUCKET_NAME = 'eva3-bucketpnk'
+AWS_S3_REGION_NAME = 'us-east-1'
+AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+AWS_QUERYSTRING_AUTH = True  # Para que se vean las fotos sí o sí
+
+STORAGES = {
+    "default": {
+        "BACKEND": "storages.backends.s3boto3.S3Boto3Storage",
+    },
+    "staticfiles": {
+        "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
+    },
+}
